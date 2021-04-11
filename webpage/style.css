@@ -1,6 +1,14 @@
 /*html {
     background-color: #39275B;
 }*/
+.yesposts
+{
+    visibility: visible;
+}
+
+.posts{
+    visibility: hidden;
+}
 
 body {
     width: 1000px;

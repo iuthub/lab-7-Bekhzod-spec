@@ -1,6 +1,23 @@
 <?php  
 
 include('connection.php');
+$db = new PDO('mysql:host=localhost; dbname=blog', 'admin', 'H3hnq5ZEQ92ABUyf');
+$add_account_stmt = $db->prepare('INSERT INTO users(username, email, password, fullname, dob ) VALUES(?,?,?,?,?)');
+
+$username = '';
+$fullname = '';
+$email = '';
+$password = '';
+$dob='';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_REQUEST['username'];
+    $fullname = $_REQUEST['fullname'];
+    $email = $_REQUEST['email'];
+    $password = $_REQUEST['pwd'];
+    $add_account_stmt->execute(array($username, $email, $password, $fullname, $dob));
+    header('Location: index.php');
+}
 
 ?>
 
@@ -20,23 +37,23 @@ include('connection.php');
 				<ul class="form">
 					<li>
 						<label for="username">Username</label>
-						<input type="text" name="username" id="username" required/>
+						<input type="text" name="username" id="username" value="<?=$username?>"/>
 					</li>
 					<li>
 						<label for="fullname">Full Name</label>
-						<input type="text" name="fullname" id="fullname" required/>
+						<input type="text" name="fullname" id="fullname" value="<?=$fullname?>"/>
 					</li>
 					<li>
 						<label for="email">Email</label>
-						<input type="email" name="email" id="email" />
+						<input type="email" name="email" id="email" value="<?=$email?>"/>
 					</li>
 					<li>
 						<label for="pwd">Password</label>
-						<input type="password" name="pwd" id="pwd" required/>
+						<input type="password" name="pwd" id="pwd" value="<?=$password?>"/>
 					</li>
 					<li>
 						<label for="confirm_pwd">Confirm Password</label>
-						<input type="password" name="confirm_pwd" id="confirm_pwd" required />
+						<input type="password" name="confirm_pwd" id="confirm_pwd" />
 					</li>
 					<li>
 						<input type="submit" value="Submit" /> &nbsp; Already registered? <a href="index.php">Login</a>
